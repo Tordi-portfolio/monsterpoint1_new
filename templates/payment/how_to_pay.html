@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    :root {
+        --bg-base: #FFF4E1;
+        --card-bg: #FFE7C2;
+        --accent: #FFB347;
+        --text-main: #402F2F;
+        --border-light: #F2D5B3;
+        --highlight: #FFDEAB;
+    }
+
+    body {
+        background-color: var(--bg-base);
+        color: var(--text-main);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .guide-container {
+        max-width: 700px;
+        margin: 50px auto;
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(255, 179, 71, 0.15);
+        border: 1px solid var(--border-light);
+    }
+
+    .guide-container h2 {
+        text-align: center;
+        color: var(--accent);
+        margin-bottom: 2rem;
+    }
+
+    .step {
+        margin-bottom: 1.5rem;
+        padding: 1.2rem;
+        background: var(--highlight);
+        border-left: 4px solid var(--accent);
+        border-radius: 10px;
+        transition: box-shadow 0.3s;
+    }
+
+    .step:hover {
+        box-shadow: 0 0 12px rgba(255, 179, 71, 0.2);
+    }
+
+    .step h4 {
+        margin-bottom: 0.5rem;
+        color: var(--text-main);
+    }
+
+    .step p {
+        color: #5a3d2b;
+        line-height: 1.6;
+    }
+
+    .payment-link {
+        display: block;
+        text-align: center;
+        background: var(--accent);
+        color: white;
+        padding: 1rem;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: bold;
+        margin: 2rem 0;
+        text-decoration: none;
+        transition: background 0.3s, transform 0.2s;
+        box-shadow: 0 4px 14px rgba(255, 179, 71, 0.3);
+    }
+
+    .payment-link:hover {
+        background: #e69a30;
+        transform: translateY(-2px);
+    }
+
+    .contact-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .whatsapp-btn, .telegram-btn {
+        flex: 1;
+        text-align: center;
+        padding: 0.9rem;
+        border-radius: 10px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        max-width: 220px;
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .whatsapp-btn {
+        background: #25d366;
+    }
+
+    .whatsapp-btn:hover {
+        background: #1ebe5b;
+        transform: translateY(-2px);
+        box-shadow: 0 0 10px rgba(37, 211, 102, 0.3);
+    }
+
+    .telegram-btn {
+        background: #229ED9;
+    }
+
+    .telegram-btn:hover {
+        background: #1b8fc4;
+        transform: translateY(-2px);
+        box-shadow: 0 0 10px rgba(34, 158, 217, 0.3);
+    }
+
+    @media(max-width: 500px) {
+        .guide-container {
+            margin: 20px;
+            padding: 1.5rem;
+        }
+
+        .step {
+            padding: 1rem;
+        }
+
+        .whatsapp-btn, .telegram-btn {
+            max-width: 100%;
+        }
+    }
+</style>
+
+<div class="guide-container">
+    <h2>Complete Payment Guide</h2>
+
+    <div class="step">
+        <h4>Step 1: Visit the Payment Page</h4>
+        <p>
+            Click the button below to access all bank and crypto payment details.
+        </p>
+    </div>
+
+    <a href="{% url 'payment' %}" class="payment-link">Go to Payment Page</a>
+
+    <div class="step">
+        <h4>Step 2: Choose Your Preferred Payment Method</h4>
+        <p>
+            Select Bank Transfer, USDT (TRC20), or Bitcoin. Use the copy buttons to ensure accuracy.
+        </p>
+    </div>
+
+    <div class="step">
+        <h4>Step 3: Make the Payment</h4>
+        <p>
+            Transfer the exact amount. For crypto, ensure you use the correct blockchain (e.g., TRC20).
+        </p>
+    </div>
+
+    <div class="step">
+        <h4>Step 4: Save Your Payment Receipt</h4>
+        <p>
+            Screenshot or download your receipt. You’ll need it for confirmation.
+        </p>
+    </div>
+
+    <div class="step">
+        <h4>Step 5: Submit Your Receipt for Confirmation</h4>
+        <p>
+            Send your payment proof via WhatsApp or Telegram to our team.
+        </p>
+    </div>
+
+    <div class="step">
+        <h4>Step 6: Receive Your Fan Card</h4>
+        <p>
+            After confirmation, your Fan Card will appear in your dashboard within 48 hours. You can download and print it.
+        </p>
+    </div>
+
+    <div class="contact-buttons">
+        <a href="https://wa.me/2348100000000?text=Hello%20Admin,%20I%20have%20completed%20my%20payment.%20Please%20find%20my%20receipt%20attached%20for%20confirmation." 
+           class="whatsapp-btn" target="_blank">Contact on WhatsApp</a>
+
+        <a href="https://t.me/username?text=Hello%20Admin,%20I%20have%20completed%20my%20payment.%20Please%20find%20my%20receipt%20attached%20for%20confirmation." 
+           class="telegram-btn" target="_blank">Contact on Telegram</a>
+    </div>
+</div>
+
+{% endblock %}

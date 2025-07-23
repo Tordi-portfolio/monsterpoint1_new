@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+  :root {
+    --accent-color: #ff9100;
+    --bg-glass: rgba(255, 255, 255, 0.12);
+    --text-light: #2e2e2e;
+    --text-muted: #5a5a5a;
+    --input-bg: rgba(255, 255, 255, 0.3);
+    --shadow-glow: 0 0 15px rgba(255, 145, 0, 0.35);
+  }
+
+  body {
+    background: linear-gradient(to bottom right, #FFE5B4, #FFD89C, #FFC87C);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .neo-form-ship {
+    max-width: 650px;
+    margin: 60px auto;
+    background: var(--bg-glass);
+    backdrop-filter: blur(14px);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-glow);
+    color: var(--text-light);
+    animation: slideFadeIn 0.7s ease;
+  }
+
+  @keyframes slideFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .neo-form-ship h2 {
+    text-align: center;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+    font-size: 1.9rem;
+    text-shadow: 0 0 6px rgba(255, 145, 0, 0.4);
+  }
+
+  .neo-form-ship label {
+    display: block;
+    margin: 1.2rem 0 0.4rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .input-icon-group {
+    position: relative;
+  }
+
+  .input-icon-group i {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+  }
+
+  .neo-form-ship input,
+  .neo-form-ship select,
+  .neo-form-ship textarea {
+    width: 100%;
+    padding: 12px 14px 12px 42px;
+    border-radius: 8px;
+    background: var(--input-bg);
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    color: var(--text-light);
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.08);
+    transition: border 0.3s ease;
+  }
+
+  .neo-form-ship input:focus,
+  .neo-form-ship textarea:focus,
+  .neo-form-ship select:focus {
+    outline: none;
+    border: 1px solid var(--accent-color);
+    background: rgba(255, 255, 255, 0.45);
+  }
+
+  .neo-form-ship select option {
+    background: #fff8f0;
+    color: #222;
+  }
+
+  .neo-form-ship input::placeholder,
+  .neo-form-ship textarea::placeholder {
+    color: var(--text-muted);
+  }
+
+  .neo-form-ship .btn-submit {
+    margin-top: 2.5rem;
+    width: 100%;
+    padding: 13px;
+    background: var(--accent-color);
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 18px rgba(255, 145, 0, 0.4);
+  }
+
+  .neo-form-ship .btn-submit:hover {
+    background: #e27800;
+    box-shadow: 0 6px 22px rgba(255, 145, 0, 0.55);
+  }
+
+  @media (max-width: 600px) {
+    .neo-form-ship {
+      padding: 2rem;
+      margin: 30px 20px;
+    }
+
+    .neo-form-ship h2 {
+      font-size: 1.6rem;
+    }
+  }
+</style>
+
+
+<div class="neo-form-ship">
+  <h2>Create Shipment</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      <div class="input-icon-group">
+        <i class="fa fa-{{ field.name|default:'box' }}"></i>
+        {{ field }}
+      </div>
+      {% if field.errors %}
+        <p style="color: tomato; font-size: 0.9rem;">{{ field.errors|striptags }}</p>
+      {% endif %}
+    {% endfor %}
+    <button type="submit" class="btn-submit">Submit Shipment</button>
+  </form>
+</div>
+{% endblock %}

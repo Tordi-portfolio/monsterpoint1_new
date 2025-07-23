@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+    body {
+      background-color: #fff9f0; /* Light cream base */
+    }
+
+    .checkout-wrapper {
+      background: linear-gradient(145deg, #ffe6cc, #fff9f0); /* Creamy gradient */
+      padding: 40px 20px;
+      min-height: 50vh;
+      color: #333;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .checkout-box {
+      background-color: #fff1e6; /* Layer 1 - light peach */
+      padding: 30px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(255, 204, 153, 0.4);
+      border: 1px solid #ffd9b3;
+    }
+
+    .checkout-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: #cc6600;
+    }
+
+    .checkout-box ul {
+      list-style: none;
+      padding-left: 0;
+      background-color: #fff9f0; /* Layer 2 - softer inner section */
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .checkout-box li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f2d9c7;
+    }
+
+    .checkout-box p {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      color: #884400;
+    }
+
+    .checkout-box button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      background-color: #cc6600;
+      color: #fff9f0;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      cursor: pointer;
+      margin-top: 25px;
+    }
+
+    .checkout-box button:hover {
+      background-color: #a65400;
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 600px) {
+      .checkout-box {
+        padding: 20px;
+      }
+
+      .checkout-box h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+
+  <div class="checkout-wrapper">
+    <div class="checkout-box">
+      <h2>Checkout</h2>
+      <ul>
+        {% for item in cart_items %}
+          <li>{{ item.product.name }} x {{ item.quantity }} = ${{ item.subtotal }}</li>
+        {% endfor %}
+      </ul>
+      <hr>
+      <p><strong>Total: ${{ total }}</strong></p>
+
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
