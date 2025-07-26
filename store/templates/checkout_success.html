@@ -116,13 +116,38 @@
       font-size: 1rem;
     }
   }
+
+
+  
+@keyframes pulsePop {
+  0%, 100% {
+    transform: scale(1.5);
+    color: red;
+  }
+  20% {
+    color: blue;
+  }
+  75% {
+    color: green;
+  }
+  50% {
+    transform: scale(0.7);
+    color: #fff;
+  }
+}
+
+.pop-image {
+  animation: pulsePop 4s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+
 </style>
 
 <div class="checkout-success-container">
   <div class="success-card">
     <div class="success-header" style="background: #fff2dc;">
       <div class="success-icon">
-        <img src="{% static 'image/good-logo.jpg' %}" alt="">
+        <img src="{% static 'image/good-logo.jpg' %}" alt="" class="pop-image">
       </div>
 
       <h2>Thank you for your order!</h2>
